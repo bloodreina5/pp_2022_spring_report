@@ -69,6 +69,7 @@ title=\lstname,
 \hspace*{5cm}\hspace*{-5cm}\textbf{Выполнила:} \\ студентка группы 381908-4 \\ Андрич Мария\\
 \\
 \hspace*{5cm}\hspace*{-5cm}\textbf{Проверил:}\\ доцент кафедры МОСТ, \\ кандидат технических наук \\ Сысоев А.В.\\
+}
 \vspace{\fill}
 
 \begin{center} Нижний Новгород \\ 2022 \end{center}
@@ -172,7 +173,8 @@ double tbbMonteCarlo(double(*f)(const std::vector<double>&),
                                 const std::vector<double>& a,
                                 const std::vector<double>& b, int steps);
 \end{lstlisting}
-\par Распараллеливание ведётся через операцию редукии: \verb| tbb::parallel_reduce|\par На вход поступает \verb|tbb::blocked_range<size_t>(0, steps)|
+\par Распараллеливание ведётся через операцию редукии: \verb| tbb::parallel_reduce|
+\par На вход поступает \verb|tbb::blocked_range<size_t>(0, steps)|
 \subsection*{std::threads}
 \addcontentsline{toc}{subsection}{std::threads}
 \begin{lstlisting}
@@ -203,8 +205,8 @@ double stdMonteCarlo(double(*f)(const std::vector<double>&),
 
 \begin{itemize}
 \item Процессор: AMD А6;
-\item Оперативная память: 4 ГБ ;
-\item ОС: Microsoft Windows 10 ;
+\item Оперативная память: 4 ГБ;
+\item ОС: Microsoft Windows 10.
 \end{itemize}
 \par Замеры параллельных версий производились на 4 потоках.
 \begin{table}[!h]
@@ -229,6 +231,7 @@ double stdMonteCarlo(double(*f)(const std::vector<double>&),
 В ходе выполнения данной лабораторной работы были реализованы последовательная и параллельная реализации алгоритма вычисления многомерных интегралов методом Монте-Карло.
 \par Параллельные реализации доказали свою эффективность, благодаря использованию тестов, созданных для данной программы с использованием Google C++ TestingFramework.
 \newpage
+
 % Список литературы
 \begin{thebibliography}{1}
 \addcontentsline{toc}{section}{Список литературы}
@@ -242,7 +245,7 @@ double stdMonteCarlo(double(*f)(const std::vector<double>&),
 \section*{Приложение}
 \addcontentsline{toc}{section}{Приложение}
 \par Последовательная версия
-\par \verb|1.monte_carlo.cpp|
+\par \verb|1.monte-carlo.cpp|
 \begin{lstlisting}
 // Copyright 2022 Andrich Maria
 #include <vector>
@@ -250,7 +253,7 @@ double stdMonteCarlo(double(*f)(const std::vector<double>&),
 #include <random>
 #include <algorithm>
 #include <ctime>
-#include "../../modules/task_1/andrich_m_montecarlo/montecarlo.h"
+#include "../../modules/task_1/andrich_m_monte-carlo/monte-carlo.h"
 
 double seqMonteCarlo(double(*f)(std::vector<double>), const std::vector<double>& a,
     const std::vector<double>& b, int s) {
@@ -276,11 +279,11 @@ double seqMonteCarlo(double(*f)(std::vector<double>), const std::vector<double>&
     return res;
 }
 \end{lstlisting}
-\par \verb|2.montecarlo.h|
+\par \verb|2.monte-carlo.h|
 \begin{lstlisting}
 // Copyright 2022 Andrich Maria
-#ifndef MODULES_TASK_1_ANDRICH_M_MONTECARLO_MONTECARLO_H_
-#define MODULES_TASK_1_ANDRICH_M_MONTECARLO_MONTECARLO_H_
+#ifndef MODULES_TASK_1_ANDRICH_M_MONTE_CARLO_MONTE_CARLO_H_
+#define MODULES_TASK_1_ANDRICH_M_MONTE_CARLO_MONTE_CARLO_H_
 
 #include <vector>
 #include <string>
@@ -288,7 +291,7 @@ double seqMonteCarlo(double(*f)(std::vector<double>), const std::vector<double>&
 double seqMonteCarlo(double(*f)(std::vector<double>), const std::vector<double>&a,
     const std::vector<double>&b, int s);
 
-#endif  // MODULES_TASK_1_ANDRICH_M_MONTECARLO_MONTECARLO_H_
+#endif  // MODULES_TASK_1_ANDRICH_M_MONTE_CARLO_MONTE_CARLO_H_
 \end{lstlisting}
 \par \verb|3.main.cpp|
 \begin{lstlisting}
@@ -296,7 +299,7 @@ double seqMonteCarlo(double(*f)(std::vector<double>), const std::vector<double>&
 #include <gtest/gtest.h>
 #include <vector>
 #include <cmath>
-#include "./montecarlo.h"
+#include "./monte-carlo.h"
 
 double seqIntegral_1(std::vector<double> x) {
     return x[0] * x[0];
@@ -354,7 +357,7 @@ int main(int argc, char** argv) {
 \end{lstlisting}
 
 \par OpenMP Версия
-\par \verb|1.monte_carlo.cpp|
+\par \verb|1.montecarlo.cpp|
 \begin{lstlisting}
 #include <iostream>
 #include "../../../modules/task_2/andric_m_montecarlo/montecarlo.h"
@@ -435,10 +438,10 @@ double MonteCarloOmp(double(*func)(const std::vector<double>&),
     res = S * res / (steps * threadnum);
     return res;
 }
-
 \end{lstlisting}
-\par \verb|2.monte_carlo.h|
+\par \verb|2.montecarlo.h|
 \begin{lstlisting}
+// Copyright 2022 Andrich Maria
 #ifndef MODULES_TASK_2_ANDRIC_M_MONTECARLO_MONTECARLO_H_
 #define MODULES_TASK_2_ANDRIC_M_MONTECARLO_MONTECARLO_H_
 
@@ -458,10 +461,11 @@ double MonteCarloOmp(double(*func)(const std::vector < double > &),
     const std::vector < double > & right,
       uint64_t steps, int threadnum, int seed = 0);
 
-#endif  // MODULES_TASK_2_ANDRIC_M_MONTECARLO_MONTECARLO_H_
+#endif  // MODULES_TASK_2_ANDRIC_M_MONTECARLO_MONTECARLO_H_|
 \end{lstlisting}
 \par \verb|3.main.cpp|
 \begin{lstlisting}
+// Copyright 2022 Andrich Maria
 #include <gtest/gtest.h>
 
 #include <iostream>
@@ -570,7 +574,7 @@ TEST(MonteCarlo_test_omp, test_3) {
 #include <string>
 #include <algorithm>
 #include <vector>
-#include "../../../modules/task_3/andrich_m_montecarlo/montecarlo.h"
+#include "../../../modules/task_3/andrich_m_montecarlo/monte_carlo.h"
 
 double seqMonteCarlo(double(*f)(const std::vector<double>&),
                                 const std::vector<double>& a,
@@ -638,8 +642,8 @@ double tbbMonteCarlo(double(*f)(const std::vector<double>&),
 \par \verb|2.monte_carlo.h|
 \begin{lstlisting}
 // Copyright 2022 Andrich Maria
-#ifndef MODULES_TASK_3_ANDRICH_M_MONTECARLO_MONTECARLO_H_
-#define MODULES_TASK_3_ANDRICH_M_MONTECARLO_MONTECARLO_H
+#ifndef MODULES_TASK_3_ANDRICH_M_MONTE_CARLO_MONTE_CARLO_H_
+#define MODULES_TASK_3_ANDRICH_M_MONTE_CARLO_MONTE_CARLO_H_
 
 #include <vector>
 #include <string>
@@ -652,7 +656,7 @@ double tbbMonteCarlo(double(*f)(const std::vector<double>&),
                      const std::vector<double>& a,
                      const std::vector<double>& b, int s);
 
-#endif  // MODULES_TASK_3_ANDRICH_M_MONTECARLO_MONTECARLO_H
+#endif  // MODULES_TASK_3_ANDRICH_M_MONTE_CARLO_MONTE_CARLO_H_
 \end{lstlisting}
 \par \verb|3.main.cpp|
 \begin{lstlisting}
@@ -661,7 +665,7 @@ double tbbMonteCarlo(double(*f)(const std::vector<double>&),
 #include <tbb/tick_count.h>
 #include <cmath>
 #include <vector>
-#include "../../../modules/task_3/andrich_m_montecarlo/montecarlo.h"
+#include "../../../modules/task_3/andrich_m_montecarlo/monte_carlo.h"
 
 double Integral_1(const std::vector<double>& x) {
     return x[0] * x[0];
@@ -778,7 +782,7 @@ int main(int argc, char** argv) {
 #include <iostream>
 #include <vector>
 #include "../../3rdparty/unapproved/unapproved.h"
-#include "../../../modules/task_4/andrich_m_montecarlo/montecarlo.h"
+#include "../../../modules/task_4/andrich_m_montecarlo/monte_carlo.h"
 
 double seqMonteCarlo(double(*f)(const std::vector<double>&),
                                 const std::vector<double>& a,
@@ -869,8 +873,8 @@ double stdMonteCarlo(double(*f)(const std::vector<double>&),
 \par \verb|2.monte_carlo.h|
 \begin{lstlisting}
 // Copyright 2022 Andrich Maria
-#ifndef MODULES_TASK_4_ANDRICH_M_MONTECARLO_MONTECARLO_H_
-#define MODULES_TASK_4_ANDRICH_M_MONTECARLO_MONTECARLO_H_
+#ifndef MODULES_TASK_4_ANDRICH_M_MONTE_CARLO_MONTE_CARLO_H_
+#define MODULES_TASK_4_ANDRICH_M_MONTE_CARLO_MONTE_CARLO_H_
 
 #include <vector>
 #include <string>
@@ -888,7 +892,7 @@ double stdMonteCarlo(double(*f)(const std::vector<double>&),
                      const std::vector<double>& a,
                      const std::vector<double>& b, int s);
 
-#endif  // MODULES_TASK_4_ANDRICH_M_MONTECARLO_MONTECARLO_H_
+#endif  // MODULES_TASK_4_ANDRICH_M_MONTE_CARLO_MONTE_CARLO_H_
 \end{lstlisting}
 \par \verb|3.main.cpp|
 \begin{lstlisting}
@@ -897,7 +901,7 @@ double stdMonteCarlo(double(*f)(const std::vector<double>&),
 #include <cmath>
 #include <vector>
 #include <chrono>
-#include "../../../modules/task_4/andrich_m_montecarlo/montecarlo.h"
+#include "../../../modules/task_4/andrich_m_montecarlo/monte_carlo.h"
 
 double Integral_1(const std::vector<double>& x) {
     return x[0] * x[0];
